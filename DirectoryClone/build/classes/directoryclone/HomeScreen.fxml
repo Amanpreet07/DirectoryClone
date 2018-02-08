@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="Base" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="557.0" minWidth="900.0" prefHeight="570.0" prefWidth="880.0" style="-fx-background-color: #3d5afe; -fx-background-radius: 30; -fx-border-radius: 30;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directoryclone.HomeScreenController">
+    <stylesheets>
+        <URL value="@homescreen.css" />
+    </stylesheets>
+   <children>
+      <StackPane fx:id="Stack" layoutX="10.0" layoutY="-2.0">
+         <children>
+            <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="550.0" minWidth="880.0" prefHeight="550.0" prefWidth="800.0">
+               <top>
+                  <VBox prefHeight="163.0" prefWidth="800.0">
+                     <children>
+                        <HBox prefHeight="49.0" prefWidth="800.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label focusTraversable="false" graphicTextGap="6.0" prefHeight="56.0" prefWidth="319.0" text="DIRECTORY CLONE" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="Verdana" size="22.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Icons/root-directory%20(1).png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Separator focusTraversable="false" opacity="0.0" prefHeight="4.0" prefWidth="414.0" />
+                              <JFXButton alignment="TOP_CENTER" buttonType="RAISED" contentDisplay="CENTER" focusTraversable="false" onAction="#Action_Minimize" prefHeight="56.0" prefWidth="50.0" ripplerFill="WHITE" style="-fx-background-radius: 20;" text=" " textFill="WHITE">
+                                 <font>
+                                    <Font name="Verdana" size="14.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Icons/diminish.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="MINIMIZE" />
+                                 </tooltip>
+                              </JFXButton>
+                              <JFXButton alignment="TOP_CENTER" buttonType="RAISED" contentDisplay="CENTER" focusTraversable="false" onAction="#Action_Quit" prefHeight="56.0" prefWidth="50.0" ripplerFill="WHITE" style="-fx-background-radius: 20;" text=" " textFill="WHITE">
+                                 <font>
+                                    <Font name="Verdana" size="14.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Icons/closed.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="EXIT" />
+                                 </tooltip>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <Separator focusTraversable="false" opacity="0.5" prefHeight="1.0" prefWidth="696.0" />
+                        <VBox prefHeight="117.0" prefWidth="800.0">
+                           <children>
+                              <HBox prefHeight="59.0" prefWidth="800.0" spacing="10.0">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefHeight="52.0" prefWidth="105.0" text="PATH :" textFill="WHITE">
+                                       <padding>
+                                          <Insets left="10.0" right="10.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="Verdana" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="InputPath" editable="false" focusTraversable="false" prefHeight="50.0" prefWidth="597.0" promptText="No path added" style="-fx-background-color: #3d5afe;">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <tooltip>
+                                          <Tooltip text="INPUT PATH FOR SCAN" />
+                                       </tooltip>
+                                    </TextField>
+                                    <JFXButton fx:id="Button_Choose1" buttonType="RAISED" focusTraversable="false" onAction="#Action_Choose1" prefHeight="43.0" prefWidth="130.0" ripplerFill="#3d5afe" style="-fx-background-color: #ffffff; -fx-background-radius: 25;" text="CHOOSE" textFill="#3d5afe">
+                                       <font>
+                                          <Font name="Verdana" size="15.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="5.0" top="3.0" />
+                                       </HBox.margin>
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Icons/hand.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <tooltip>
+                                          <Tooltip text="CHOOSE DIRECTORY FOR SCANNIG" />
+                                       </tooltip>
+                                    </JFXButton>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="2.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Separator focusTraversable="false" opacity="0.5" prefWidth="200.0" />
+                              <HBox prefHeight="58.0" prefWidth="800.0" spacing="10.0">
+                                 <children>
+                                    <RadioButton fx:id="Option_ShallowScan" focusTraversable="false" mnemonicParsing="false" prefHeight="50.0" prefWidth="165.0" selected="true" text="Shallow Scan" textFill="WHITE">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="Toggle" />
+                                       </toggleGroup>
+                                       <font>
+                                          <Font name="Verdana" size="15.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Icons/file-tree%20(1).png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets left="2.0" />
+                                       </HBox.margin>
+                                       <tooltip>
+                                          <Tooltip text="Optimal for &quot;Games&quot; and &quot;Directory&quot; with few subfolders." />
+                                       </tooltip>
+                                    </RadioButton>
+                                    <RadioButton fx:id="Option_DeepScan" focusTraversable="false" mnemonicParsing="false" prefHeight="50.0" prefWidth="155.0" text="Deep Scan" textFill="WHITE" toggleGroup="$Toggle">
+                                       <font>
+                                          <Font name="Verdana" size="15.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Icons/file-tree.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <tooltip>
+                                          <Tooltip text="Optimal for &quot;Music&quot;, &quot;Docs&quot;, &quot;Videos&quot; and &quot;Images&quot;." />
+                                       </tooltip>
+                                    </RadioButton>
+                                    <CheckBox fx:id="Check_append" mnemonicParsing="false" prefHeight="54.0" prefWidth="176.0" text="Append new scan" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="15.0" />
+                                       </font>
+                                       <tooltip>
+                                          <Tooltip text="To add more scan results without removing previous ones" />
+                                       </tooltip>
+                                    </CheckBox>
+                                    <Separator focusTraversable="false" opacity="0.0" prefHeight="14.0" prefWidth="182.0" />
+                                    <JFXButton fx:id="Button_Scan" buttonType="RAISED" focusTraversable="false" onAction="#Action_Scan" prefHeight="42.0" prefWidth="131.0" ripplerFill="#3d5afe" style="-fx-background-color: #ffffff; -fx-background-radius: 25;" text="SCAN" textFill="#3d5afe">
+                                       <font>
+                                          <Font name="Verdana" size="15.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="5.0" top="3.0" />
+                                       </HBox.margin>
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Icons/magnifier.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <tooltip>
+                                          <Tooltip text="Scan directory structure" />
+                                       </tooltip>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <Separator focusTraversable="false" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+               </top>
+               <bottom>
+                  <VBox prefHeight="72.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="Error" focusTraversable="false" prefHeight="27.0" prefWidth="880.0" style="-fx-background-color: #ffffff;" text="HOVER OVER FIELDS AND NODES FOR USAGE TIP." textFill="#cd1010" underline="true">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fx:id="Error_img" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Icons/caution-sign.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="47.0" prefWidth="880.0" spacing="5.0">
+                           <children>
+                              <Label focusTraversable="false" prefHeight="45.0" prefWidth="163.0" text="OUTPUT PATH :" textFill="WHITE">
+                                 <font>
+                                    <Font name="Verdana" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="OutputPath" alignment="CENTER" editable="false" focusTraversable="false" prefHeight="42.0" prefWidth="366.0" promptText="Click to choose path" style="-fx-background-color: #3d5afe;">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <tooltip>
+                                    <Tooltip text="Click to choose &quot;Output Directory&quot;." />
+                                 </tooltip>
+                              </TextField>
+                              <Label prefHeight="50.0" prefWidth="29.0" text="\\\" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="OutputFile" focusColor="WHITE" maxWidth="184.0" minWidth="149.0" prefHeight="42.0" prefWidth="184.0" promptText="FILENAME" unFocusColor="#f5f2f2">
+                                 <font>
+                                    <Font name="Verdana" size="18.0" />
+                                 </font>
+                                 <tooltip>
+                                    <Tooltip text="Enter filename (without extension)" />
+                                 </tooltip>
+                              </JFXTextField>
+                              <JFXButton fx:id="Button_Save" buttonType="RAISED" focusTraversable="false" onAction="#Action_Save" prefHeight="49.0" prefWidth="109.0" ripplerFill="#3d5afe" style="-fx-background-color: #ffffff; -fx-background-radius: 25;" text="SAVE " textFill="#3d5afe">
+                                 <font>
+                                    <Font name="Verdana" size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Icons/diskette.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets top="3.0" />
+                                 </HBox.margin>
+                                 <tooltip>
+                                    <Tooltip text="Write scan results to file (location provided)" />
+                                 </tooltip>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </bottom>
+               <center>
+                  <ScrollPane focusTraversable="false" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="313.0" prefWidth="878.0">
+                           <children>
+                              <JFXTextArea fx:id="TextArea" editable="false" focusColor="BLACK" focusTraversable="false" layoutX="6.0" maxWidth="880.0" minWidth="787.0" prefHeight="317.0" prefWidth="880.0" promptText="NO SCAN RESULTS TO SHOW">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <tooltip>
+                                    <Tooltip text="Input path's layout (after scan)" />
+                                 </tooltip>
+                              </JFXTextArea>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
+               </center>
+            </BorderPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>
