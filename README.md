@@ -42,6 +42,8 @@ Clone and open in NetBeans or Eclipse or import java files to project and build 
 
 Will upload .EXE soon.
 
+Download distribution.zip, extract and launch DirectoryClone.jar file.
+
 The tool is self understood. I have included usage tips while hovering over fields and buttons.
 
 DEEP SCAN : To include all the subfolders and files under a directory. For **MOVIES, TV-SHOWS, SONGS etc.**
