@@ -9,7 +9,7 @@ Can be used to store a list of files as a backup measure or simply to keep track
 Ever been in the situation where :
 + You need to backup your collection of **MOVIES**, **TV SHOWS**, **SONGS** and *some other stuff*
 + It is too much to make a backup and update it everytime.
-+ You can re-download it whenever you need only if you know about everyfile you had.
++ You can re-download it whenever you need only if you know about every file you had.
 
 **NO ?** NEVER MIND.
 
@@ -38,6 +38,10 @@ Not sure ? You are **NOT A COLLECTOR** then. You dont have the urge to keep ever
  ---
  
  ### How to use ? 
+Clone and open in NetBeans or Eclipse or import java files to project and build and run.
+
+Will upload .EXE soon.
+
 The tool is self understood. I have included usage tips while hovering over fields and buttons.
 
 DEEP SCAN : To include all the subfolders and files under a directory. For **MOVIES, TV-SHOWS, SONGS etc.**
