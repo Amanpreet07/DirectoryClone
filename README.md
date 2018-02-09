@@ -25,8 +25,6 @@ No ? You can always buy couple extra Hard-Drives.
 
 Yes ? Git Clone.
 
-Not sure ? You are **NOT A COLLECTOR** then. You dont have the urge to keep everything for yourself, forever . **#collectors_will_understand.**
-
 ---
 
 ### ABOUT THE TOOL
