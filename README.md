@@ -36,11 +36,9 @@ Yes ? Git Clone.
  ---
  
  ### How to use ? 
-Clone and open in NetBeans or Eclipse or import java files to project and build and run.
+Clone and import/open the source files in NetBeans or Eclipse.
 
-Will upload .EXE soon.
-
-Download distribution.zip, extract and launch DirectoryClone.jar file.
+Run DirectoryClone.jar from ditribution subfolder.
 
 The tool is self understood. I have included usage tips while hovering over fields and buttons.
 
