@@ -1,0 +1,12 @@
+nbproject/
+build/
+nbbuild/
+src/commandline/
+src/icons/
+dist/*.jnlp
+dist/*.html
+dist/web-files/
+nbdist/
+.nb-gradle/
+build.xml
+manifest.mf

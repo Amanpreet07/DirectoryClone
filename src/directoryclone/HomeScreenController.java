@@ -3,6 +3,7 @@ package directoryclone;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.io.File;
+import java.io.FileFilter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -15,7 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import setup.SetupManager;
@@ -24,7 +25,7 @@ import writelib.Writer;
 public class HomeScreenController implements Initializable {
     
     @FXML
-    private AnchorPane Base;
+    private VBox Base;
     
     @FXML
     private TextField InputPath;
@@ -79,6 +80,18 @@ public class HomeScreenController implements Initializable {
           
     }
 
+    /**
+     * To clear the text area
+     * @param event 
+     */ 
+    @FXML
+    void Action_Clear(ActionEvent event) {
+        Check_append.setDisable(true);
+        Check_append.setSelected(false);
+        TextArea.clear();
+        al.clear();
+    }
+    
     /**
      * To minimize the parent screen with custom button because parent
      * is set to UNDECORATED.
@@ -196,7 +209,7 @@ public class HomeScreenController implements Initializable {
             Shallow_Scan(new File(InputPath.getText()));
             fill_Shallow();
         }
-        
+        Check_append.setDisable(false);
     }
     
     /**
@@ -207,6 +220,7 @@ public class HomeScreenController implements Initializable {
      * @param file 
      */
     private void Shallow_Scan(File file){
+        
         File flist[] = file.listFiles();
         String slist[] = new String[flist.length];
         int count = 0;
@@ -230,6 +244,7 @@ public class HomeScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          
+        Check_append.setDisable(true);
         // event for click on textfield for ouput path
         // more efficient way to use this instead of a method.
          OutputPath.setOnMouseClicked(e -> {
@@ -251,9 +266,9 @@ public class HomeScreenController implements Initializable {
        });
         
          // initialize the css for textFields.
-        InputPath.setStyle("-fx-text-inner-color: white;-fx-background-color: #3d5afe");
-        OutputPath.setStyle("-fx-text-inner-color: white;-fx-background-color: #3d5afe");
-        OutputFile.setStyle("-fx-text-inner-color: white;-fx-background-color: #3d5afe");
+//        InputPath.setStyle("-fx-text-inner-color: white;-fx-background-color: #3d5afe");
+//        OutputPath.setStyle("-fx-text-inner-color: white;-fx-background-color: #3d5afe");
+//        OutputFile.setStyle("-fx-text-inner-color: white;-fx-background-color: #3d5afe");
         
     } 
     
