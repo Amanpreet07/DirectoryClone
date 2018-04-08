@@ -1,8 +1,8 @@
 nbproject/
 build/
 nbbuild/
-src/commandline
-src/icons
+src/CommandLine
+src/Icons
 dist/*.jnlp
 dist/*.html
 dist/web-files/
