@@ -2,20 +2,24 @@ package directoryclone;
 
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -49,10 +53,26 @@ public class HomeScreenController implements Initializable {
     private Label Error;
 
     @FXML
-    private ImageView Error_img;
+    private FontAwesomeIconView Error_img;
 
     @FXML
     private TextField OutputPath;
+    
+//    @FXML
+//    private RadioButton filter_all;
+//
+//    @FXML
+//    private RadioButton filter_image;
+//
+//    @FXML
+//    private RadioButton filter_audio;
+//
+//    @FXML
+//    private RadioButton filter_video;
+//
+//    @FXML
+//    private RadioButton filter_doc;
+
 
     /**
      * Triggers upon clicking choose button for input path.
@@ -92,26 +112,26 @@ public class HomeScreenController implements Initializable {
         al.clear();
     }
     
-    /**
-     * To minimize the parent screen with custom button because parent
-     * is set to UNDECORATED.
-     * @param event 
-     */
-    @FXML
-    void Action_Minimize(ActionEvent event) {
-       Stage stage = (Stage) Base.getScene().getWindow(); 
-       stage.setIconified(true);
-    }
-    
-    /**
-     * Stops the process and ends the execution.
-     * @param event 
-     */
-    @FXML
-    void Action_Quit(ActionEvent event) {
-        Platform.exit();
-        System.exit(0);
-    }
+//    /**
+//     * To minimize the parent screen with custom button because parent
+//     * is set to UNDECORATED.
+//     * @param event 
+//     */
+//    @FXML
+//    void Action_Minimize(ActionEvent event) {
+//       Stage stage = (Stage) Base.getScene().getWindow(); 
+//       stage.setIconified(true);
+//    }
+//    
+//    /**
+//     * Stops the process and ends the execution.
+//     * @param event 
+//     */
+//    @FXML
+//    void Action_Quit(ActionEvent event) {
+//        Platform.exit();
+//        System.exit(0);
+//    }
 
     /**
      * To write the scan results to a file created and written by my TextLibrary
@@ -184,11 +204,11 @@ public class HomeScreenController implements Initializable {
         // adds a line notifying of the same.
         if(Option_DeepScan.isSelected()){
             if(Check_append.isSelected()){
-            al.add("### Appending DeepScan results for " + InputPath.getText() 
+            TextArea.appendText("### Appending DeepScan results for " + InputPath.getText() 
                     + " ###\n");    
             }
             else{
-            al.add("### DeepScan results for " + InputPath.getText() 
+            TextArea.appendText("### DeepScan results for " + InputPath.getText() 
                     + " ###\n");    
             }
             printDirectoryTree(new File(InputPath.getText()));  
@@ -198,11 +218,11 @@ public class HomeScreenController implements Initializable {
         // line to the result area.
         else if(Option_ShallowScan.isSelected()){
             if(Check_append.isSelected()){
-            al.add("### Apending ShallowScan results for " + InputPath.getText() 
+            TextArea.appendText("### Apending ShallowScan results for " + InputPath.getText() 
                     + " ###\n");    
             }
             else{
-            al.add("### ShallowScan results for " + InputPath.getText() 
+            TextArea.appendText("### ShallowScan results for " + InputPath.getText() 
                     + " ###\n");    
             }
             
@@ -210,8 +230,51 @@ public class HomeScreenController implements Initializable {
             fill_Shallow();
         }
         Check_append.setDisable(false);
+        if(tracking.isSelected()){
+            String alreadyHas[] = DataManager.readList();
+            int check = 0;
+            for (String alreadyHa : alreadyHas) {
+                if(alreadyHa.equals(InputPath.getText())){
+                    check = 1;
+                }
+            }
+            if(check == 1){
+                
+            }else{
+            Monitor m = new Monitor();
+            m.setCount(al.size());
+            m.setPath(InputPath.getText());
+            String scan = "shallow";
+            if(Option_DeepScan.isSelected()){
+                scan = "deep";
+            }
+            m.setScanType(scan);
+            m.setTimeStamp(DateManip.getCurrentDT("all"));
+            m.setfList(al.toArray(new String[al.size()]));
+            DataManager.writeObj(m);
+            DataManager.addToList(InputPath.getText());
+            Error.setText("Tracking added!!!");
+            }
+        }
     }
     
+     @FXML
+    void onMode(ActionEvent event) throws IOException {
+         System.out.println("wut?");
+        Parent root = FXMLLoader.load(getClass().getResource("MonitorMode.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle(" ");
+        stage.centerOnScreen();
+        stage.setScene(scene);
+        stage.show();
+        
+    }
+
+    
+    @FXML
+    private CheckBox tracking;
+     
     /**
      * reads the list of all files and folders within provided path.
      * NOTE : It does not scan the sub folders.
@@ -220,7 +283,6 @@ public class HomeScreenController implements Initializable {
      * @param file 
      */
     private void Shallow_Scan(File file){
-        
         File flist[] = file.listFiles();
         String slist[] = new String[flist.length];
         int count = 0;
@@ -230,6 +292,22 @@ public class HomeScreenController implements Initializable {
         }
         
     }
+    
+//    private FileFilter getFilter(){
+//        
+//        if(filter_all.isSelected()){
+//            return new AllFileFilter();
+//        }else if(filter_audio.isSelected()){
+//            return new AudioFileFilter();
+//        }else if(filter_doc.isSelected()){
+//            return new DocFileFilter();
+//        }else if(filter_image.isSelected()){
+//            return new ImageFileFilter();
+//        }else if(filter_video.isSelected()){
+//            return new VideoFileFilter();
+//        }
+//        return new AllFileFilter();
+//    }
     
     /**
      * writes the result of shallow scan to result area. 
@@ -281,7 +359,7 @@ public class HomeScreenController implements Initializable {
      * @param folder
      * @return 
      */
-    public static String printDirectoryTree(File folder) {
+    public String printDirectoryTree(File folder) {
        int indent = 0;
        StringBuilder sb = new StringBuilder();
        printDirectoryTree(folder, indent, sb);
@@ -296,7 +374,7 @@ public class HomeScreenController implements Initializable {
      * @param indent
      * @param sb 
      */
-    private static void printDirectoryTree(File folder, int indent,
+    private void printDirectoryTree(File folder, int indent,
         StringBuilder sb) {
       sb.append(getIndentString(indent));
       sb.append("+--");
