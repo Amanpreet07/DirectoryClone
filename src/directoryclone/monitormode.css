@@ -1,0 +1,12 @@
+
+.mainFxmlClass {
+
+}
+
+.root { 
+    -fx-background-color: #3d5afe; 
+    }
+    .button:hover{
+        -fx-scale-x: 1.045;
+        -fx-scale-y: 1.045;
+    }

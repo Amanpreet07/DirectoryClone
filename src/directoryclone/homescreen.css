@@ -9,7 +9,7 @@
     .text-field {
     -fx-prompt-text-fill: white;
     -fx-text-inner-color: white;
-    -fx-background-color: #3d5afe
+    -fx-background-color: #3d5afe;
     }
     .button:hover{
         -fx-scale-x: 1.08;
