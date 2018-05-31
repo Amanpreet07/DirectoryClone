@@ -55,7 +55,6 @@ public class MonitorModeController implements Initializable {
         int index = 0;
         for (Monitor obj1 : obj) {
             if(obj1==m){
-               
                 return index;  
             }else{
                 index++;
@@ -105,6 +104,7 @@ public class MonitorModeController implements Initializable {
         check = true;
     }
 
+    // improve complexity
     private void fillLists(Monitor m){
         String temp[] = m.getfList();
         Collection c1 = new ArrayList();
