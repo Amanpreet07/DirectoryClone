@@ -18,89 +18,141 @@ public class MonitorModeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         list.getItems().addAll(DataManager.readList());
-        check = false;
-
     }
-
-    private Monitor findObj(String val) {
-        for (Monitor obj1 : obj) {
-            if (obj1.getPath().equals(val)) {
-                return obj1;
-            }
-        }
-        return null;
-    }
-
+    
+    // object to hold derseralised scans
     private Monitor obj[];
 
+    // object to hold base object of current directory
+    private Monitor base;
+    
+    // combobox for tracked directories
     @FXML
     private ComboBox<String> list;
 
+    // combobox for scan sessions
     @FXML
-    private Label old_time;
-
+    private ComboBox<String> sessions;
+    
     @FXML
     private JFXListView<String> added;
 
     @FXML
     private JFXListView<String> removed;
+    
+    @FXML
+    private Label label_removed;
+    
+    @FXML
+    private Label label_timeStamp;
 
     @FXML
-    private Label fileCount;
+    private Label label_scanType;
+
+    @FXML
+    private Label label_count;
+
+    @FXML
+    private Label label_changed;
+
+    @FXML
+    private Label label_output;
+
+    @FXML
+    private Label label_added;
     
-    private boolean check;
+    @FXML
+    private Label label_sessions;
     
-    private int findIndex(Monitor m){
-        int index = 0;
-        for (Monitor obj1 : obj) {
-            if(obj1==m){
-                return index;  
-            }else{
-                index++;
+    @FXML
+    void onList(ActionEvent event) {
+        sessions.getItems().clear();
+        String dir = list.getValue();
+        obj = DataManager.readObj(DataManager.findCounter(dir));
+        
+        String session[] = new String[obj.length];
+        for (int i = 0; i < obj.length; i++) {
+            session[i] = obj[i].getName();
+            if(obj[i].getName().equals("Base Scan")){
+                base = obj[i];
             }
         }
-        return index;
+        sessions.getItems().addAll(session);
+        label_sessions.setText(String.valueOf(obj.length));
+    }
+    
+    private void clearLabels(){
+        label_timeStamp.setText("");
+        label_scanType.setText("");
+        label_count.setText("");
+        label_changed.setText("");
+        label_output.setText("Displaying output for ");
+        label_added.setText("Added Files");
+        label_removed.setText("Removed Files");
+        added.getItems().clear();
+        removed.getItems().clear();
+    }
+    
+    @FXML
+    void onSession(ActionEvent event) {
+        clearLabels();
+        // to supress null pointer exception
+        if(sessions.getValue()==null){
+            return;
+        }
+        Monitor m = findSession(sessions.getValue());
+        label_timeStamp.setText(m.getTimeStamp());
+        label_scanType.setText(m.getScanType());
+        label_count.setText(String.valueOf(m.getCount()));
+        label_changed.setText(String.valueOf(m.getCount_change()));
+        label_output.setText(label_output.getText()+" "+sessions.getValue());
+        label_added.setText(label_added.getText()+" : "
+                +String.valueOf(m.getCount_added()));
+        label_removed.setText(label_removed.getText()+" : "
+                +String.valueOf(m.getCount_removed()));
+        if(m.getfList_added()==null){
+        added.getItems().add("Nothing added");
+        }else{
+        added.getItems().addAll(m.getfList_added());    
+        }
+        if(m.getfList_removed()==null){
+        removed.getItems().add("Nothing removed");    
+        }else{
+        removed.getItems().addAll(m.getfList_removed());    
+        }
+           
     }
     
     @FXML
     void onUpdate(ActionEvent event) {
-        if(check){
-        Monitor obj1 = findObj(list.getValue());
+        // Step 1: new Scan
+        // clear fields
+        al.clear();
+        added.getItems().clear();
+        removed.getItems().clear();
+        // stop if no input
+        if (list.getValue() == null) {
+            return;
+        }
+        if(base.getScanType().equals("shallow")){
+            Shallow_Scan(new File(base.getPath()));
+        }
+        else{
+            printDirectoryTree(new File(base.getPath()));
+        }
+        // output 
+        fillLists(base);
+        // Step 2: New Object
         Monitor m = new Monitor();
             m.setCount(al.size());
-            m.setPath(obj1.getPath());
-            m.setScanType(obj1.getScanType());
+            m.setPath(base.getPath());
+            m.setScanType(base.getScanType());
             m.setTimeStamp(DateManip.getCurrentDT("all"));
             m.setfList(al.toArray(new String[al.size()]));
             // update object
            // System.out.println(findIndex(obj1));
-            DataManager.updateObj(findIndex(obj1), m);
-        }
-    }
-
-    @FXML
-    void onScan(ActionEvent event) {
-        // scan first
-        al.clear();
-        added.getItems().clear();
-        removed.getItems().clear();
-        String val = list.getValue();
-        if (val == null) {
-            return;
-        }
-        Monitor obj1 = findObj(list.getValue());
-        if(obj1.getScanType().equals("shallow")){
-            Shallow_Scan(new File(obj1.getPath()));
-        }
-        else{
-            printDirectoryTree(new File(obj1.getPath()));
-        }
-       
-        // output 
-        old_time.setText(obj1.getTimeStamp());
-        fileCount.setText(String.valueOf(Math.abs(obj1.getCount()-al.size())));
-        fillLists(obj1);
-        check = true;
+           
+        
     }
 
     // improve complexity
@@ -121,6 +173,20 @@ public class MonitorModeController implements Initializable {
         c1.removeAll(c3);
         removed.getItems().addAll(c1);
     }
+    
+    // to search and return object with given Name
+    private Monitor findSession(String name){
+        Monitor m = null;
+        for (Monitor obj1 : obj) {
+            if(obj1.getName().equals(name)){
+                m = obj1;
+            }
+        }
+        return m;
+    }
+    
+    // all methods below are copied from HomeScreenController
+    // Purpose: To Scan the directory 
     
     ArrayList<String> al = new ArrayList<>();
 

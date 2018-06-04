@@ -62,9 +62,6 @@ public class HomeScreenController implements Initializable {
 
     @FXML
     private CheckBox tracking;
-    
-    @FXML
-    private JFXButton track_mode;
 
 //    @FXML
 //    private RadioButton filter_all;
@@ -262,12 +259,16 @@ public class HomeScreenController implements Initializable {
             }
             // if already tracked, do nothing.
             if (check == 1) {
-                
+                // {O_o}
             } else {
                 // if new, initiate tracking using first scan.
                 DataManager.addToList(InputPath.getText());
                 Monitor m = new Monitor();
+                m.setName("Base Scan");
                 m.setCount(al.size());
+                m.setCount_added(0);
+                m.setCount_removed(0);
+                m.setCount_change(0);
                 m.setPath(InputPath.getText());
                 String scan = "shallow";
                 if (Option_DeepScan.isSelected()) {
@@ -276,6 +277,8 @@ public class HomeScreenController implements Initializable {
                 m.setScanType(scan);
                 m.setTimeStamp(DateManip.getCurrentDT("all"));
                 m.setfList(al.toArray(new String[al.size()]));
+                m.setfList_added(null);
+                m.setfList_removed(null);
                 DataManager.writeObj(m);
                 Error.setText("Tracking added!!!");
                 tracking.setSelected(false);
@@ -461,6 +464,3 @@ public class HomeScreenController implements Initializable {
     }
 
 }
-
-// Scan once to initiate tracking.
-// This directory is already being tracked.
