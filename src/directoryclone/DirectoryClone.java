@@ -11,6 +11,10 @@ public class DirectoryClone extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
+        // verify core folders
+        if(!DataManager.verify()){
+        DataManager.setupDir();
+        }
        Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);

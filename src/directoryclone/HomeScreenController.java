@@ -91,6 +91,9 @@ public class HomeScreenController implements Initializable {
         DirectoryChooser dc = new DirectoryChooser();
         dc.setTitle("Choose root folder to scan");
         File dir = dc.showDialog(stage);
+        
+        // disables tracking by default
+        tracking.setSelected(false);
         // warning message is hidden if proper folder is choosen.
         if (dir != null) {
             InputPath.setText(dir.getAbsolutePath());
@@ -101,13 +104,8 @@ public class HomeScreenController implements Initializable {
             boolean flag = false;
             for (String alreadyHa : alreadyHas) {
                 if (alreadyHa.equals(InputPath.getText())) {
-                    flag = true;
-                    System.out.println("found..");
-                }
-                else{
-                    System.out.println("not found..");
-                }
-                
+                    flag = true;     
+                }    
             }
             if(flag){
                 track_status.setVisible(true);
@@ -253,16 +251,21 @@ public class HomeScreenController implements Initializable {
         }
         Check_append.setDisable(false);
         if (tracking.isSelected()) {
+            // reads list of tracked directories
             String alreadyHas[] = DataManager.readList();
             int check = 0;
+            // to check if current input dir already tracked or not
             for (String alreadyHa : alreadyHas) {
                 if (alreadyHa.equals(InputPath.getText())) {
                     check = 1;
                 }
             }
+            // if already tracked, do nothing.
             if (check == 1) {
-
+                
             } else {
+                // if new, initiate tracking using first scan.
+                DataManager.addToList(InputPath.getText());
                 Monitor m = new Monitor();
                 m.setCount(al.size());
                 m.setPath(InputPath.getText());
@@ -274,8 +277,10 @@ public class HomeScreenController implements Initializable {
                 m.setTimeStamp(DateManip.getCurrentDT("all"));
                 m.setfList(al.toArray(new String[al.size()]));
                 DataManager.writeObj(m);
-                DataManager.addToList(InputPath.getText());
                 Error.setText("Tracking added!!!");
+                tracking.setSelected(false);
+                tracking.setDisable(true);
+                track_status.setVisible(false);
             }
         }
     }

@@ -194,7 +194,7 @@
       <Separator focusTraversable="false" prefWidth="200.0" />
       <HBox prefHeight="40.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
          <children>
-            <JFXTextArea fx:id="TextArea" editable="false" focusColor="WHITE" focusTraversable="false" maxWidth="894.0" minWidth="894.0" prefHeight="247.0" prefWidth="894.0" promptText="NO SCAN RESULTS TO SHOW" unFocusColor="WHITE" HBox.hgrow="ALWAYS">
+            <JFXTextArea fx:id="TextArea" editable="false" focusColor="WHITE" focusTraversable="false" minWidth="894.0" prefHeight="247.0" prefWidth="894.0" promptText="NO SCAN RESULTS TO SHOW" unFocusColor="WHITE" HBox.hgrow="ALWAYS">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

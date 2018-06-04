@@ -19,8 +19,7 @@ public class MonitorModeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         list.getItems().addAll(DataManager.readList());
         check = false;
-        obj = new Monitor[list.getItems().size()];
-        obj = DataManager.readObj();
+
     }
 
     private Monitor findObj(String val) {
