@@ -111,6 +111,7 @@ public class HomeScreenController implements Initializable {
             }
             if(flag){
                 track_status.setVisible(true);
+                track_status.setText("This directory is already being tracked.");
                 tracking.setDisable(true);
 //                track_mode.setVisible(true);
             }else{
@@ -291,6 +292,16 @@ public class HomeScreenController implements Initializable {
 
     }
 
+     @FXML
+    void action_track(ActionEvent event) {
+        if(tracking.isSelected()){
+            track_status.setVisible(true);
+            track_status.setText("Scan once to initiate tracking.");
+        }else{
+            track_status.setVisible(false);
+        }
+    }
+    
     /**
      * reads the list of all files and folders within provided path. NOTE : It
      * does not scan the sub folders. To be used for directories with lot of sub
@@ -445,3 +456,6 @@ public class HomeScreenController implements Initializable {
     }
 
 }
+
+// Scan once to initiate tracking.
+// This directory is already being tracked.

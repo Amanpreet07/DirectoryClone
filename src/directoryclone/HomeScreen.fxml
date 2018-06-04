@@ -87,7 +87,7 @@
       <Separator focusTraversable="false" opacity="0.5" prefWidth="200.0" />
       <HBox maxHeight="-Infinity" prefHeight="30.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <CheckBox fx:id="tracking" disable="true" focusTraversable="false" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="29.0" prefWidth="191.0" stylesheets="@homescreen.css" text="Track this directory" HBox.hgrow="ALWAYS">
+            <CheckBox fx:id="tracking" disable="true" focusTraversable="false" maxHeight="-Infinity" mnemonicParsing="false" onAction="#action_track" prefHeight="29.0" prefWidth="191.0" stylesheets="@homescreen.css" text="Track this directory" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="Verdana" size="15.0" />
                </font>
