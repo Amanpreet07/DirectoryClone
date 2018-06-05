@@ -26,6 +26,12 @@ public class MonitorModeController implements Initializable {
     // object to hold base object of current directory
     private Monitor base;
     
+    // object to hold added files for update scan
+    private String listAdded[];
+    
+    // object to hold removed files for update scan
+    private String listRemoved[];
+    
     // combobox for tracked directories
     @FXML
     private ComboBox<String> list;
@@ -34,9 +40,11 @@ public class MonitorModeController implements Initializable {
     @FXML
     private ComboBox<String> sessions;
     
+    // list view to show added files
     @FXML
     private JFXListView<String> added;
 
+    // list view to show removed files
     @FXML
     private JFXListView<String> removed;
     
@@ -126,10 +134,10 @@ public class MonitorModeController implements Initializable {
     @FXML
     void onUpdate(ActionEvent event) {
         // Step 1: new Scan
-        // clear fields
-        al.clear();
-        added.getItems().clear();
-        removed.getItems().clear();
+        al.clear(); // to empty the list
+//        added.getItems().clear();
+//        removed.getItems().clear();
+        
         // stop if no input
         if (list.getValue() == null) {
             return;
@@ -144,34 +152,72 @@ public class MonitorModeController implements Initializable {
         fillLists(base);
         // Step 2: New Object
         Monitor m = new Monitor();
+            m.setName("Scan "+DateManip.getCurrentDT("dd-MMM-hh:mm"));
             m.setCount(al.size());
             m.setPath(base.getPath());
             m.setScanType(base.getScanType());
             m.setTimeStamp(DateManip.getCurrentDT("all"));
             m.setfList(al.toArray(new String[al.size()]));
-            // update object
-           // System.out.println(findIndex(obj1));
+            m.setfList_added(listAdded);
+            m.setfList_removed(listRemoved);
+            m.setCount_added(listAdded.length);
+            m.setCount_removed(listRemoved.length);
+            m.setCount_change(listAdded.length+listRemoved.length);
+            // add object
+           DataManager.writeObj(m);
            
         
     }
 
     // improve complexity
+    // compares file lists to determine added and removed
     private void fillLists(Monitor m){
+        // c1 contains base scan's file list
         String temp[] = m.getfList();
         Collection c1 = new ArrayList();
         c1.addAll(Arrays.asList(temp));
         
+        // c2 contains current scan's file list
         Collection c2 = new ArrayList();
         c2.addAll(al);
         
+        // to determine added files
         c2.removeAll(c1);
-        added.getItems().addAll(c2);
+        listAdded = (String[]) c2.toArray(new String[c2.size()]);
         
+        // c3 contains current scan's file list
+        // bcuz old collection has been modified
         Collection c3 = new ArrayList();
         c3.addAll(al);
         
+        // to determine removed files
         c1.removeAll(c3);
-        removed.getItems().addAll(c1);
+        listRemoved = (String[]) c1.toArray(new String[c1.size()]);
+    }
+    
+    // compares file lists to determine added and removed
+    private void compareLists(Monitor m, Monitor m2){
+        
+        String temp[] = m.getfList();
+        Collection c1 = new ArrayList();
+        c1.addAll(Arrays.asList(temp));
+        
+        // c2 contains current scan's file list
+        Collection c2 = new ArrayList();
+        c2.addAll((Arrays.asList(m2.getfList())));
+        
+        // to determine added files
+        c2.removeAll(c1);
+        listAdded = (String[]) c2.toArray(new String[c2.size()]);
+        
+        // c3 contains current scan's file list
+        // bcuz old collection has been modified
+        Collection c3 = new ArrayList();
+        c3.addAll((Arrays.asList(m2.getfList())));
+        
+        // to determine removed files
+        c1.removeAll(c3);
+        listRemoved = (String[]) c1.toArray(new String[c1.size()]);
     }
     
     // to search and return object with given Name

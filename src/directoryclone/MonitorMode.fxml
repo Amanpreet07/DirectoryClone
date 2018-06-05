@@ -85,7 +85,7 @@
                </HBox.margin>
             </Label>
             <ComboBox fx:id="sessions" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onAction="#onSession" prefHeight="25.0" prefWidth="367.0" promptText="Choose session" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-radius: 15;" visibleRowCount="6" HBox.hgrow="ALWAYS" />
-            <Label fx:id="label_timeStamp" maxWidth="-Infinity" prefHeight="26.0" prefWidth="269.0" text="Time Stamp">
+            <Label fx:id="label_timeStamp" maxWidth="-Infinity" prefHeight="26.0" prefWidth="269.0">
                <font>
                   <Font size="17.0" />
                </font>
@@ -160,20 +160,20 @@
             <Separator prefWidth="200.0" />
             <HBox maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" spacing="5.0" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="3.0" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="348.0" prefWidth="0.0" spacing="3.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label fx:id="label_added" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="293.0" text="Added Files">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <JFXListView fx:id="added" VBox.vgrow="ALWAYS" />
+                        <JFXListView fx:id="added" prefHeight="312.0" prefWidth="232.0" VBox.vgrow="ALWAYS" />
                      </children>
                      <padding>
                         <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                      </padding>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="3.0" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="348.0" prefWidth="0.0" spacing="3.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label fx:id="label_removed" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="293.0" text="Removed Files">
                            <font>
@@ -191,8 +191,8 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                      <children>
-                        <Region layoutX="15.0" layoutY="187.0" prefHeight="200.0" prefWidth="200.0" />
-                        <Region prefHeight="200.0" prefWidth="200.0" />
+                        <Region layoutX="15.0" layoutY="187.0" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                        <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                </children>
@@ -205,7 +205,7 @@
       <Separator prefWidth="200.0" />
       <HBox maxHeight="-Infinity" prefHeight="26.0" prefWidth="900.0" spacing="5.0">
          <children>
-            <Label alignment="TOP_LEFT" maxHeight="-Infinity" prefHeight="37.0" prefWidth="442.0" text="Note: Removed and Added files are compared to immediate previous scans" underline="true">
+            <Label alignment="TOP_LEFT" maxHeight="-Infinity" prefHeight="37.0" prefWidth="442.0" text="Note: Removed and Added files are compared to the Base Scan" underline="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -213,7 +213,7 @@
                   <Insets left="7.0" />
                </HBox.margin>
             </Label>
-            <Region prefHeight="37.0" prefWidth="125.0" HBox.hgrow="ALWAYS" />
+            <Region prefHeight="37.0" prefWidth="177.0" HBox.hgrow="ALWAYS" />
             <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" onAction="#onUpdate" prefHeight="37.0" prefWidth="144.0" ripplerFill="#808080" style="-fx-background-color: #ffffff; -fx-background-radius: 15;" stylesheets="@homescreen.css" text="Update">
                <font>
                   <Font size="15.0" />

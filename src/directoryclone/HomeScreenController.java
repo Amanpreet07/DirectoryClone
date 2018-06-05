@@ -295,6 +295,7 @@ public class HomeScreenController implements Initializable {
         Scene scene = new Scene(root);
         stage.setTitle(" ");
         stage.centerOnScreen();
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
 
