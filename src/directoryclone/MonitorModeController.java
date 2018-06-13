@@ -17,7 +17,7 @@ public class MonitorModeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        list.getItems().addAll(DataManager.readList());
+        d_list.getItems().addAll(DataManager.readList());
     }
     
     // object to hold derseralised scans
@@ -34,7 +34,7 @@ public class MonitorModeController implements Initializable {
     
     // combobox for tracked directories
     @FXML
-    private ComboBox<String> list;
+    private ComboBox<String> d_list;
 
     // combobox for scan sessions
     @FXML
@@ -47,6 +47,10 @@ public class MonitorModeController implements Initializable {
     // list view to show removed files
     @FXML
     private JFXListView<String> removed;
+    
+    // for info/warning/update
+    @FXML
+    private Label info;
     
     @FXML
     private Label label_removed;
@@ -75,7 +79,7 @@ public class MonitorModeController implements Initializable {
     @FXML
     void onList(ActionEvent event) {
         sessions.getItems().clear();
-        String dir = list.getValue();
+        String dir = d_list.getValue();
         obj = DataManager.readObj(DataManager.findCounter(dir));
         
         String session[] = new String[obj.length];
@@ -139,7 +143,7 @@ public class MonitorModeController implements Initializable {
 //        removed.getItems().clear();
         
         // stop if no input
-        if (list.getValue() == null) {
+        if (d_list.getValue() == null) {
             return;
         }
         if(base.getScanType().equals("shallow")){
@@ -230,6 +234,9 @@ public class MonitorModeController implements Initializable {
         }
         return m;
     }
+    
+    
+    
     
     // all methods below are copied from HomeScreenController
     // Purpose: To Scan the directory 

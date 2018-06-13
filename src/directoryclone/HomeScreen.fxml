@@ -219,12 +219,12 @@
       <Separator focusTraversable="false" layoutX="10.0" layoutY="153.0" prefWidth="200.0" />
       <HBox maxHeight="-Infinity" prefHeight="30.0" prefWidth="900.0" spacing="5.0">
          <children>
-            <FontAwesomeIconView fx:id="Error_img" glyphName="WARNING" size="20">
+            <FontAwesomeIconView fx:id="Error_img" fill="#d30707" glyphName="WARNING" size="20">
                <HBox.margin>
                   <Insets bottom="2.0" left="10.0" right="2.0" top="2.0" />
                </HBox.margin>
             </FontAwesomeIconView>
-            <Label fx:id="Error" focusTraversable="false" maxHeight="-Infinity" prefHeight="25.0" prefWidth="514.0" text="HOVER OVER FIELDS AND NODES FOR USAGE TIP." underline="true" HBox.hgrow="ALWAYS">
+            <Label fx:id="Error" focusTraversable="false" maxHeight="-Infinity" prefHeight="25.0" prefWidth="514.0" text="HOVER OVER FIELDS AND NODES FOR USAGE TIP." textFill="#d30707" underline="true" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font>

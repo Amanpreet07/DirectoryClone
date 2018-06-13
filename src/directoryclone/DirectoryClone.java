@@ -18,7 +18,7 @@ public class DirectoryClone extends Application {
        Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setMaximized(true);
+//        stage.setMaximized(true);
         stage.centerOnScreen();
         stage.show();
     }
