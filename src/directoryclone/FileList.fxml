@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="551.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directoryclone.FileListController">
+   <children>
+      <JFXTextArea fx:id="area" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="700.0" prefHeight="551.0" prefWidth="785.0" text="34t5ytuki" VBox.vgrow="ALWAYS">
+         <font>
+            <Font name="Tahoma" size="15.0" />
+         </font>
+      </JFXTextArea>
+   </children>
+</VBox>

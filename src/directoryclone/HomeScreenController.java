@@ -293,7 +293,6 @@ public class HomeScreenController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("MonitorMode.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(root);
-        stage.setTitle(" ");
         stage.centerOnScreen();
         stage.setTitle("github.com/Amanpreet07");
 //        stage.setMaximized(true);

@@ -2,6 +2,7 @@ package directoryclone;
 
 import com.jfoenix.controls.JFXListView;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,9 +10,15 @@ import java.util.Collection;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import setup.SetupManager;
+import writelib.Writer;
 
 public class MonitorModeController implements Initializable {
 
@@ -119,7 +126,11 @@ public class MonitorModeController implements Initializable {
         Monitor m = findSession(sessions.getValue());
         label_timeStamp.setText(m.getTimeStamp());
         label_scanType.setText(m.getScanType());
+        if(m.getScanType().equals("shallow")){
         label_count.setText(String.valueOf(m.getCount()));
+        }else{
+        label_count.setText("N/A");    
+        }    
         label_changed.setText(String.valueOf(m.getCount_change()));
         label_output.setText(label_output.getText() + " " + sessions.getValue());
         label_added.setText(label_added.getText() + " : "
@@ -190,9 +201,57 @@ public class MonitorModeController implements Initializable {
         // labels
         label_timeStamp.setText("CURRENT");
         label_scanType.setText(base.getScanType());
+        if(base.getScanType().equals("shallow")){
         label_count.setText(String.valueOf(al.size()));
+        }else{
+        label_count.setText("N/A");    
+        }    
         label_changed.setText(String.valueOf(listAdded.length+listRemoved.length));
         
+    }
+    
+    public Monitor temp;
+    
+    @FXML
+    void onView(ActionEvent event) throws IOException {
+        if(sessions.getValue()==null){
+            info.setText("No session selected.");
+            return;
+        }
+        temp = findSession(sessions.getValue());
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FileList.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        // to transfer text to new controller
+        FileListController fl = loader.getController();
+        fl.setValue(temp.getfList());
+        stage.setTitle("Complete Scan result");
+        stage.centerOnScreen();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    void onExport(ActionEvent event) {
+        if(sessions.getValue()==null){
+            info.setText("No session selected.");
+            return;
+        }
+        temp = findSession(sessions.getValue());
+        
+        String path = SetupManager.getDir("desktop");
+        String fname = temp.getName()+"_output.txt";
+        File f = new File(path+"//"+fname);
+        if(f.exists()){
+            Writer.clearFile(fname, path);
+        }
+        SetupManager.createFile(fname, path);
+        Writer.writeData_Block(fname, path, temp.getfList(),
+                true, Writer.PLAIN_TEXT);
+        info.setText("Exported to desktop//"+fname);
     }
     
     @FXML

@@ -232,7 +232,7 @@
                            </VBox.margin>
                         </HBox>
                         <Separator prefWidth="200.0" />
-                        <JFXButton maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="112.0" ripplerFill="#808080" style="-fx-background-color: #ffffff; -fx-background-radius: 15;" stylesheets="@homescreen.css" text="View Scan List">
+                        <JFXButton maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onAction="#onView" prefHeight="29.0" prefWidth="112.0" ripplerFill="#808080" style="-fx-background-color: #ffffff; -fx-background-radius: 15;" stylesheets="@homescreen.css" text="View Scan List">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -248,7 +248,7 @@
                               <Font name="System Italic" size="17.0" />
                            </font>
                         </Label>
-                        <JFXButton layoutX="40.0" layoutY="188.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="112.0" ripplerFill="#808080" style="-fx-background-color: #ffffff; -fx-background-radius: 15;" stylesheets="@homescreen.css" text="Export Scan List">
+                        <JFXButton layoutX="40.0" layoutY="188.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onAction="#onExport" prefHeight="29.0" prefWidth="112.0" ripplerFill="#808080" style="-fx-background-color: #ffffff; -fx-background-radius: 15;" stylesheets="@homescreen.css" text="Export Scan List">
                            <font>
                               <Font size="13.0" />
                            </font>
