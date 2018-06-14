@@ -59,30 +59,6 @@ public class ObjRW<T> {
         return ok;
     }
 
-    public boolean remove(File f, int index) {
-        boolean ok = true;
-        ArrayList<T> arr = new ArrayList<>();
-        // read previous data
-        arr = read(f);
-        if(arr==null){
-            // no data exists..
-            return false;
-        }
-        // remove object       
-        arr.remove(index);
-        // write again
-        try (FileOutputStream fs = new FileOutputStream(f);) {
-            ObjectOutputStream ob = new ObjectOutputStream(fs);
-            ob.writeObject(arr);
-            ob.close();
-        } catch (FileNotFoundException ex) {
-            ok = false;
-        } catch (IOException ex) {
-            ok = false;
-        }
-        return ok;
-    }
-
     public ArrayList<T> read(File f) {
         ArrayList<T> temp = null;
         try (FileInputStream fs = new FileInputStream(f);) {

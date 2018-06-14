@@ -55,7 +55,7 @@
                   <MaterialDesignIconView glyphName="BOOKMARK_CHECK" size="25" />
                </graphic>
             </Label>
-            <ComboBox fx:id="d_list" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onAction="#onList" prefHeight="27.0" prefWidth="416.0" promptText="Choose directory" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-radius: 15;" visibleRowCount="6" HBox.hgrow="ALWAYS">
+            <ComboBox fx:id="d_list" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onAction="#onList" prefHeight="27.0" prefWidth="416.0" promptText="Choose directory" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-radius: 15;" visibleRowCount="8" HBox.hgrow="ALWAYS">
                <tooltip>
                   <Tooltip text="List of tracked folders. Choose to open sessions" />
                </tooltip></ComboBox>
@@ -91,12 +91,12 @@
                   <Insets left="7.0" />
                </HBox.margin>
             </Label>
-            <ComboBox fx:id="sessions" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onAction="#onSession" prefHeight="25.0" prefWidth="367.0" promptText="Choose session" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-radius: 15;" visibleRowCount="6" HBox.hgrow="ALWAYS">
+            <ComboBox fx:id="sessions" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onAction="#onSession" prefHeight="25.0" prefWidth="367.0" promptText="Choose session" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-radius: 15;" visibleRowCount="8" HBox.hgrow="ALWAYS">
                <tooltip>
                   <Tooltip text="List of scanned sessions. Choose one to view properties." />
                </tooltip></ComboBox>
             <Region maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="122.0" />
-            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="29.0" prefWidth="112.0" ripplerFill="#808080" style="-fx-background-color: #ffffff; -fx-background-radius: 15;" stylesheets="@homescreen.css" text="Delete Session">
+            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" onAction="#onDelete" prefHeight="29.0" prefWidth="112.0" ripplerFill="#808080" style="-fx-background-color: #ffffff; -fx-background-radius: 15;" stylesheets="@homescreen.css" text="Delete Session">
                <font>
                   <Font size="13.0" />
                </font>
@@ -125,7 +125,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="135.0" ripplerFill="GREY" text="View Current Stats" textAlignment="RIGHT" underline="true">
+                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" onAction="#onCurrent" prefHeight="30.0" prefWidth="135.0" ripplerFill="GREY" text="View Current Stats" textAlignment="RIGHT" underline="true">
                      <font>
                         <Font name="System Italic" size="14.0" />
                      </font>
@@ -268,7 +268,7 @@
                               <Insets bottom="5.0" top="10.0" />
                            </VBox.margin>
                         </Label>
-                        <ComboBox fx:id="sessions1" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="367.0" promptText="Choose session" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-radius: 15;" visibleRowCount="6">
+                        <ComboBox fx:id="sessions1" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="367.0" promptText="Choose session" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-radius: 15;" visibleRowCount="4">
                            <VBox.margin>
                               <Insets bottom="10.0" left="25.0" right="25.0" />
                            </VBox.margin>
@@ -311,7 +311,7 @@
                </HBox.margin>
             </Label>
             <Region prefHeight="37.0" prefWidth="177.0" HBox.hgrow="ALWAYS" />
-            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" onAction="#onUpdate" prefHeight="10.0" prefWidth="144.0" ripplerFill="#808080" style="-fx-background-color: #ffffff; -fx-background-radius: 15;" stylesheets="@homescreen.css" text="Update">
+            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" onAction="#onUpdate" prefHeight="10.0" prefWidth="144.0" ripplerFill="#808080" style="-fx-background-color: #ffffff; -fx-background-radius: 15;" stylesheets="@homescreen.css" text="Add Session">
                <font>
                   <Font size="13.0" />
                </font>
@@ -322,7 +322,7 @@
                   <Insets right="4.0" />
                </HBox.margin>
                <tooltip>
-                  <Tooltip text="Add new session to current directory" />
+                  <Tooltip text="Adds new session to current directory" />
                </tooltip>
             </JFXButton>
          </children>

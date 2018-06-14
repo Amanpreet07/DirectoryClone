@@ -103,4 +103,24 @@ public class DataManager {
         new ObjRW<Monitor>().write(f, m2);
     }
     
+    // remove session from the target file
+    public static void removeObj(String s_name, int counter){
+        ObjRW<Monitor> ob = new ObjRW<>();    
+        File f = new File(getPath()+"\\"+String.valueOf(counter)+".dcl");
+        // read file
+        ArrayList<Monitor>  ar = new ObjRW<Monitor>().read(f);
+        // clear old file
+        Writer.clearFile(String.valueOf(counter)+".dcl", getPath());
+        // remove target object
+        for (Monitor ar1 : ar) {
+            if(ar1.getName().equals(s_name)){
+                // do nothing.
+                continue;
+            }else{
+                // write back
+                ob.write(f, ar1);
+            }
+        }
+        
+    }
 }
