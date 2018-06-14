@@ -8,6 +8,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -54,7 +55,10 @@
                   <MaterialDesignIconView glyphName="BOOKMARK_CHECK" size="25" />
                </graphic>
             </Label>
-            <ComboBox fx:id="d_list" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onAction="#onList" prefHeight="27.0" prefWidth="416.0" promptText="Choose directory" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-radius: 15;" visibleRowCount="6" HBox.hgrow="ALWAYS" />
+            <ComboBox fx:id="d_list" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onAction="#onList" prefHeight="27.0" prefWidth="416.0" promptText="Choose directory" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-radius: 15;" visibleRowCount="6" HBox.hgrow="ALWAYS">
+               <tooltip>
+                  <Tooltip text="List of tracked folders. Choose to open sessions" />
+               </tooltip></ComboBox>
             <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="91.0" text="Sessions :">
                <font>
                   <Font name="System Italic" size="17.0" />
@@ -64,6 +68,9 @@
                <font>
                   <Font size="17.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Number of different sessions of scan" />
+               </tooltip>
             </Label>
          </children>
       </HBox>
@@ -84,7 +91,10 @@
                   <Insets left="7.0" />
                </HBox.margin>
             </Label>
-            <ComboBox fx:id="sessions" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onAction="#onSession" prefHeight="25.0" prefWidth="367.0" promptText="Choose session" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-radius: 15;" visibleRowCount="6" HBox.hgrow="ALWAYS" />
+            <ComboBox fx:id="sessions" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onAction="#onSession" prefHeight="25.0" prefWidth="367.0" promptText="Choose session" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-radius: 15;" visibleRowCount="6" HBox.hgrow="ALWAYS">
+               <tooltip>
+                  <Tooltip text="List of scanned sessions. Choose one to view properties." />
+               </tooltip></ComboBox>
             <Region maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="122.0" />
             <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="29.0" prefWidth="112.0" ripplerFill="#808080" style="-fx-background-color: #ffffff; -fx-background-radius: 15;" stylesheets="@homescreen.css" text="Delete Session">
                <font>
@@ -93,6 +103,9 @@
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
+               <tooltip>
+                  <Tooltip text="To remove currently selected session" />
+               </tooltip>
             </JFXButton>
          </children>
       </HBox>
@@ -112,10 +125,13 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="135.0" text="View Current Stats" textAlignment="RIGHT" underline="true">
+                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="135.0" ripplerFill="GREY" text="View Current Stats" textAlignment="RIGHT" underline="true">
                      <font>
                         <Font name="System Italic" size="14.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="Outputs current stats" />
+                     </tooltip>
                   </JFXButton>
                </children>
             </HBox>
@@ -129,7 +145,10 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <JFXListView fx:id="added" prefHeight="312.0" prefWidth="150.0" VBox.vgrow="ALWAYS" />
+                        <JFXListView fx:id="added" prefHeight="312.0" prefWidth="150.0" styleClass="list-view2" stylesheets="@monitormode.css" VBox.vgrow="ALWAYS">
+                           <tooltip>
+                              <Tooltip text="List of added files" />
+                           </tooltip></JFXListView>
                      </children>
                      <padding>
                         <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
@@ -142,7 +161,10 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <JFXListView fx:id="removed" VBox.vgrow="ALWAYS" />
+                        <JFXListView fx:id="removed" styleClass="list-view1" stylesheets="@monitormode.css" VBox.vgrow="ALWAYS">
+                           <tooltip>
+                              <Tooltip text="List of removed files" />
+                           </tooltip></JFXListView>
                      </children>
                      <padding>
                         <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
@@ -217,6 +239,9 @@
                            <VBox.margin>
                               <Insets left="25.0" right="25.0" top="10.0" />
                            </VBox.margin>
+                           <tooltip>
+                              <Tooltip text="Outputs complete scan result" />
+                           </tooltip>
                         </JFXButton>
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="398.0" text="-Or-">
                            <font>
@@ -230,6 +255,9 @@
                            <VBox.margin>
                               <Insets bottom="10.0" left="25.0" right="25.0" />
                            </VBox.margin>
+                           <tooltip>
+                              <Tooltip text="Saves complete scan result to a textfile (desktop)" />
+                           </tooltip>
                         </JFXButton>
                         <Separator layoutX="15.0" layoutY="177.0" prefWidth="200.0" />
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="408.0" text="Compare current session to" VBox.vgrow="ALWAYS">
@@ -244,6 +272,9 @@
                            <VBox.margin>
                               <Insets bottom="10.0" left="25.0" right="25.0" />
                            </VBox.margin>
+                           <tooltip>
+                              <Tooltip text="To compare currently selected session to another session" />
+                           </tooltip>
                         </ComboBox>
                         <Region layoutX="15.0" layoutY="223.0" maxWidth="1.7976931348623157E308" prefHeight="66.0" prefWidth="383.0" VBox.vgrow="ALWAYS" />
                      </children>
@@ -290,6 +321,9 @@
                <HBox.margin>
                   <Insets right="4.0" />
                </HBox.margin>
+               <tooltip>
+                  <Tooltip text="Add new session to current directory" />
+               </tooltip>
             </JFXButton>
          </children>
          <VBox.margin>
