@@ -38,6 +38,21 @@
                </graphic>
             </Label>
             <Region maxHeight="-Infinity" prefHeight="40.0" prefWidth="200.0" stylesheets="@homescreen.css" HBox.hgrow="ALWAYS" />
+            <JFXButton contentDisplay="GRAPHIC_ONLY" focusTraversable="false" onAction="#Action_Help" ripplerFill="#808080" style="-fx-background-color: #fff; -fx-border-color: #fff;" text=" ">
+               <graphic>
+                  <FontAwesomeIconView glyphName="QUESTION" size="25" />
+               </graphic>
+               <tooltip>
+                  <Tooltip text="How to use">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Tooltip>
+               </tooltip>
+               <HBox.margin>
+                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+               </HBox.margin>
+            </JFXButton>
          </children>
          <VBox.margin>
             <Insets left="3.0" right="3.0" />

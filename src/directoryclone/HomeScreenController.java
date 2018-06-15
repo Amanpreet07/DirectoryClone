@@ -4,8 +4,11 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -125,6 +128,13 @@ public class HomeScreenController implements Initializable {
     }
 }
 
+    @FXML
+    void Action_Help(ActionEvent event) throws IOException, URISyntaxException {
+        String link = "https://github.com/Amanpreet07/DirectoryClone";
+        Desktop d = Desktop.getDesktop();
+        d.browse(new URI(link));
+    }
+    
 /**
  * To clear the text area
  *

@@ -1,8 +1,11 @@
 package directoryclone;
 
 import com.jfoenix.controls.JFXListView;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import readlib.Reader;
 import setup.SetupManager;
 import writelib.Writer;
 
@@ -46,6 +50,11 @@ public class MonitorModeController implements Initializable {
     // combobox for scan sessions
     @FXML
     private ComboBox<String> sessions;
+    
+    // combobox for comparison
+    @FXML
+    private ComboBox<String> sessions1;
+
 
     // list view to show added files
     @FXML
@@ -82,6 +91,9 @@ public class MonitorModeController implements Initializable {
 
     @FXML
     private Label label_sessions;
+    
+    @FXML
+    private Label session_info;
 
     @FXML
     void onList(ActionEvent event) {
@@ -90,18 +102,41 @@ public class MonitorModeController implements Initializable {
             return;
         }
         sessions.getItems().clear();
+        sessions1.getItems().clear();
         String dir = d_list.getValue();
         obj = DataManager.readObj(DataManager.findCounter(dir));
 
-        String session[] = new String[obj.length];
+        String session[] = new String[obj.length]; // for base and session combobox
         for (int i = 0; i < obj.length; i++) {
-            session[i] = obj[i].getName();
             if (obj[i].getName().equals("Base Scan")) {
                 base = obj[i];
             }
+            session[i] = obj[i].getName();     
         }
         sessions.getItems().addAll(session);
         label_sessions.setText(String.valueOf(obj.length));
+        // sessions for comparisons
+        if(session.length>2){
+            sessions1.setDisable(false);
+            session_info.setVisible(false);
+            // value
+            int j = 0;
+            String session1[] = new String[obj.length-1]; // for comparison combobox
+            for (Monitor obj1 : obj) {
+                if(obj1.getName().equals("Base Scan")){
+                    continue;
+                }else{
+                    session1[j++] = obj1.getName();
+                }
+            }
+            sessions1.getItems().addAll(session1); 
+        }else{
+            sessions1.setDisable(true);
+            session_info.setText("Sessions must be more than 2");
+            session_info.setVisible(true);
+        }
+        
+        
     }
 
     private void clearLabels() {
@@ -109,13 +144,58 @@ public class MonitorModeController implements Initializable {
         label_scanType.setText("");
         label_count.setText("");
         label_changed.setText("");
-        label_output.setText("Displaying output for ");
+        label_output.setText("Displaying output for -");
         label_added.setText("Added Files");
         label_removed.setText("Removed Files");
         added.getItems().clear();
         removed.getItems().clear();
     }
 
+     @FXML
+    void onHelp(ActionEvent event) throws URISyntaxException, IOException {
+        String link = "https://github.com/Amanpreet07/DirectoryClone";
+        Desktop d = Desktop.getDesktop();
+        d.browse(new URI(link));
+    }
+    
+    @FXML
+    void onStop(ActionEvent event) {
+        if(d_list.getValue()==null){
+            info.setText("No directory selected.");
+            return;
+        }
+        // delete data file
+        int num = DataManager.findCounter(d_list.getValue());
+        String fname = String.valueOf(num)+".dcl";
+        SetupManager.removeFile(fname, DataManager.getPath());
+        // remove from the tracklist
+        // 1. read all data
+        String[] templist = Reader.readAll("list.dcl", DataManager.getPath(),
+                Reader.ENCRYPTED);
+        // 2. clear the file
+        Writer.clearFile("list.dcl", DataManager.getPath());
+        // 3. write back updated list
+        String newlist[] = new String[templist.length-1];
+        int i = 0;
+        for (String templist1 : templist) {
+            if(templist1.contains(d_list.getValue())){
+                continue;
+            }else{
+                newlist[i++] = templist1;
+            }
+        }
+        Writer.writeData_Block("list.dcl", DataManager.getPath(),
+                newlist, true, Writer.ENCRYPT);
+        // info
+        info.setText("Tracking removed.");
+        d_list.setValue(null);
+        sessions.setValue(null);
+        label_sessions.setText(null);
+        d_list.getItems().clear();
+        d_list.getItems().addAll(DataManager.readList());
+        
+    }
+    
     @FXML
     void onSession(ActionEvent event) {
         clearLabels();
@@ -132,7 +212,7 @@ public class MonitorModeController implements Initializable {
         label_count.setText("N/A");    
         }    
         label_changed.setText(String.valueOf(m.getCount_change()));
-        label_output.setText(label_output.getText() + " " + sessions.getValue());
+        label_output.setText("Displaying output for -" + sessions.getValue());
         label_added.setText(label_added.getText() + " : "
                 + String.valueOf(m.getCount_added()));
         label_removed.setText(label_removed.getText() + " : "
@@ -186,8 +266,7 @@ public class MonitorModeController implements Initializable {
             return;
         }
         // info
-        label_output.setText("Displaying output for");
-        label_output.setText(label_output.getText()+" Current Scan");
+        label_output.setText("Displaying output for - Current Scan");
         // scan
         if (base.getScanType().equals("shallow")) {
             Shallow_Scan(new File(base.getPath()));
@@ -199,6 +278,8 @@ public class MonitorModeController implements Initializable {
         added.getItems().addAll(listAdded);
         removed.getItems().addAll(listRemoved);
         // labels
+        label_added.setText("Added Files: "+listAdded.length);
+        label_removed.setText("Removed Files: "+listRemoved.length);
         label_timeStamp.setText("CURRENT");
         label_scanType.setText(base.getScanType());
         if(base.getScanType().equals("shallow")){
@@ -252,6 +333,39 @@ public class MonitorModeController implements Initializable {
         Writer.writeData_Block(fname, path, temp.getfList(),
                 true, Writer.PLAIN_TEXT);
         info.setText("Exported to desktop//"+fname);
+    }
+    
+    @FXML
+    void onCompare(ActionEvent event) {
+        if(sessions.getValue()==null){
+            info.setText("No session selected.");
+            return;
+        }
+        if(sessions1.getValue()==null){
+            return;
+        }
+        temp = findSession(sessions.getValue());
+        Monitor temp2 = findSession(sessions1.getValue());
+        if(temp==temp2){
+            session_info.setText("No point in self compairing.");
+            session_info.setVisible(true);
+            return;
+        }
+        session_info.setText("Sessions compared...");
+        session_info.setVisible(true);
+        added.getItems().clear();
+        removed.getItems().clear();
+        // info
+        label_output.setText("Displaying output for - Comparison");
+        compareLists(temp, temp2);
+        added.getItems().addAll(listAdded);
+        removed.getItems().addAll(listRemoved);
+        label_added.setText("Added Files: "+listAdded.length);
+        label_removed.setText("Removed Files: "+listRemoved.length);
+        label_count.setText("N/A");
+        label_scanType.setText(temp.getScanType());
+        label_timeStamp.setText("N/A");
+        
     }
     
     @FXML
