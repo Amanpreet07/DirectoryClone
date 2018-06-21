@@ -11,7 +11,7 @@ Can be used to store a list of files as a backup measure or simply to keep track
  You can always clone and make couple changes to run it on MAC OR LINUX.
  
  ---
- How to run ?
+ ### How to run ?
  * Git clone -> download .zip
  * Extract to a folder
  * Run ../dist/DirectoryClone.jar
