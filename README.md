@@ -3,7 +3,6 @@ Java desktop app to scan and store entire structure of provided path and monitor
 Can be used to store a list of files as a backup measure or simply to keep track of *movies and shows* you have/had .
 
 ---
-
 ### ABOUT THE TOOL
  Made on JAVA using Scene Builder.
  The methods are generic(Not OS dependent), should work on all OS(thats why JAVA).
@@ -17,13 +16,16 @@ Can be used to store a list of files as a backup measure or simply to keep track
  * Run ../dist/DirectoryClone.jar
 
  ---
- 
  ### How to use ? 
  see [wiki](https://github.com/Amanpreet07/DirectoryClone/wiki)
 
 ---
- ### Got a query?
+ ### Got a query or a suggestion ?
  Drop a mail arora07aman@gmail.com with heading **dclone query**. I will reply as soon as i can.
+
+---
+ ### Report Bug/issues
+ Pull request. XD
 
 ---
 
@@ -31,4 +33,6 @@ Can be used to store a list of files as a backup measure or simply to keep track
 Only me. Aman Preet Singh arora07aman@gmail.com 
 --> Made this couple months ago for my personal use. Improved it a bit and uploaded for others.
  
-
+---
+### LICENSE
+MIT License. [view](https://github.com/Amanpreet07/DirectoryClone/blob/master/LICENSE)
